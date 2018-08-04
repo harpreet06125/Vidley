@@ -1,0 +1,20 @@
+﻿
+@model Vidley.Models.Customer
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customer Details</h2>
+<h1>@Model.Name</h1>
+<ul>
+    <li>
+        MemberShipType: @Model.Name
+    </li>
+    @if (Model.BirthDate.HasValue)
+    {
+        <li>
+            BirthDate: @Model.BirthDate.Value.ToShortDateString()
+        </li>
+    }
+</ul>
