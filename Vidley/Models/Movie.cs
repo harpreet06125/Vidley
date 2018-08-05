@@ -23,11 +23,13 @@ namespace Vidley.Models
 
         [Required]
         [Display(Name = "Number In Stock")]
+        [Range(1,20,ErrorMessage = "Stock should be between 1 and 20")]
         public short NumberInStock { get; set; }
 
         public Genre Genre { get; set; }
 
         [Display(Name="Genre")]
+        [Required]
         public byte GenreId { get; set; }
     }
 }

@@ -48,6 +48,7 @@ namespace Vidley.Controllers
             var membershiptypes = _context.MemberShipTypes.ToList();
             var viewmodel = new CustomerFormViewModel()
             {
+                Customer =  new Customer(),
                 MemberShipTypes = membershiptypes
             };
             return View("CustomerForm",viewmodel);
@@ -56,6 +57,16 @@ namespace Vidley.Controllers
         [HttpPost]
         public ActionResult Save(CustomerFormViewModel customerForm)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CustomerFormViewModel
+                {
+                    Customer =  customerForm.Customer,
+                    MemberShipTypes =  _context.MemberShipTypes.ToList()
+                };
+                return View("CustomerForm", viewModel);
+            }
+
             if (customerForm.Customer.Id == 0)
             {
                 _context.Customers.Add(customerForm.Customer);

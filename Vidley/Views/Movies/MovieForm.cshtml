@@ -6,28 +6,40 @@
 }
 
 @{
-   string title =   Model.Movie == null ? "New Movie" : "Edit Movie";
+   string title =   Model.Id == 0 ? "New Movie" : "Edit Movie";
     ViewBag.Title = @title;
 }
 <h2>@title</h2>
+@Html.AntiForgeryToken()
 @using (Html.BeginForm("Save", "Movies"))
 {
     <div class="form-group">
-        @Html.LabelFor(m=>m.Movie.Name)
-        @Html.TextBoxFor(m=>m.Movie.Name,new {@class="form-control"})
+        @Html.LabelFor(m=>m.Name)
+        @Html.TextBoxFor(m=>m.Name,new {@class="form-control"})
+        @Html.ValidationMessageFor(m=>m.Name)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m=>m.Movie.ReleaseDate)
-        @Html.TextBoxFor(m=>m.Movie.ReleaseDate,"{0:d MMM yyyy}", new {@class="form-control"})
+        @Html.LabelFor(m=>m.ReleaseDate)
+        @Html.TextBoxFor(m=>m.ReleaseDate,"{0:d MMM yyyy}", new {@class="form-control"})
+        @Html.ValidationMessageFor(m=>m.ReleaseDate)
+    </div>
+ 
+    <div class="form-group">
+        @Html.LabelFor(m=>m.GenreId)
+        @Html.DropDownListFor(m=> m.GenreId,new SelectList(Model.Genres,"Id","Name"),"Select Genre",new {@class="form-control"})
+        @Html.ValidationMessageFor(m=>m.GenreId)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m=>m.Movie.DateAdded)
-        @Html.TextBoxFor(m=>m.Movie.DateAdded, "{0:d MMM yyyy}", new {@class="form-control"})
+        @Html.LabelFor(m=> m.NumberInStock)
+        @Html.TextBoxFor(m=> m.NumberInStock,new {@clas="form-control"})
+        @Html.ValidationMessageFor(m=>m.NumberInStock)
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m=>m.Movie.GenreId)
-        @Html.DropDownListFor(m=> m.Movie.GenreId,new SelectList(Model.Genres,"Id","Name"),"Select Genre",new {@class="form-control"})
-    </div>
-    @Html.HiddenFor(m => Model.Movie.Id)
+    @Html.HiddenFor(m => Model.Id)
     <button class="btn btn-primary" type="submit"  >Save</button>
+}
+
+
+@section scripts
+{
+  @Scripts.Render("~/bundles/jqueryval")
 }
