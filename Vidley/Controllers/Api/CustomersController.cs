@@ -57,7 +57,7 @@ namespace Vidley.Controllers.Api
 
             var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
             if(customerInDb==null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
 
             Mapper.Map(customerDto, customerInDb);
 
