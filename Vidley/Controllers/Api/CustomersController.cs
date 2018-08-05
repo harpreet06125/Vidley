@@ -50,31 +50,33 @@ namespace Vidley.Controllers.Api
 
         //PUT /api/customers/1
         [HttpPut]
-        public void UpdateCustomer(int id, CustomerDto customerDto)
+        public IHttpActionResult UpdateCustomer(int id, CustomerDto customerDto)
         {
-            if(!ModelState.IsValid)
-                throw  new HttpResponseException(HttpStatusCode.BadRequest);
+            if (!ModelState.IsValid)
+                return BadRequest();
 
             var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
             if(customerInDb==null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            Mapper.Map<CustomerDto, Customer>(customerDto, customerInDb);
+            Mapper.Map(customerDto, customerInDb);
 
             _context.SaveChanges();
+            return Ok();
 
         }
 
         //GET /api/customers/1
         [HttpDelete]
-        public void DeleteCustomer(int id)
+        public IHttpActionResult DeleteCustomer(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
-            if(customer == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+            if (customer == null)
+                return NotFound();
 
             _context.Customers.Remove(customer);
             _context.SaveChanges();
+            return Ok();
         }
 
 
