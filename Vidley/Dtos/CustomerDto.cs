@@ -18,8 +18,10 @@ namespace Vidley.Dtos
         //[Min18YearsIfMember]
         public DateTime? BirthDate { get; set; }
 
-            public bool IsSubscribedToNewsletter { get; set; }
+        public bool IsSubscribedToNewsletter { get; set; }
 
+
+        public MemberShipTypeDto MemberShipType { get; set; }
 
         public byte MemberShipTypeId { get; set; }
 
