@@ -24,8 +24,11 @@ namespace Vidley.Dtos
         [Range(1, 20, ErrorMessage = "Stock should be between 1 and 20")]
         public short NumberInStock { get; set; }
 
+        public GenreDto Genre { get; set; }
 
         [Required]
         public byte GenreId { get; set; }
+
+
     }
 }

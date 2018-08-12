@@ -22,6 +22,7 @@ namespace Vidley.App_Start
                 .ForMember(m => m.Id, opt => opt.Ignore());
 
             Mapper.CreateMap<MemberShipType, MemberShipTypeDto>();
+            Mapper.CreateMap<Genre, GenreDto>();
         }
     }
 }

@@ -10,6 +10,7 @@ using Vidley.ViewModels;
 
 namespace Vidley.Controllers
 {
+    
     public class CustomersController : Controller
     {
 
@@ -26,6 +27,7 @@ namespace Vidley.Controllers
         }
 
         // GET: Customers
+        
         public ActionResult Index()
         {
             return View();

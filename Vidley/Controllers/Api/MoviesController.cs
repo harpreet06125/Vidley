@@ -7,7 +7,7 @@ using System.Web.Http;
 using AutoMapper;
 using Vidley.Dtos;
 using Vidley.Models;
-
+using System.Data.Entity;
 namespace Vidley.Controllers.Api
 {
     public class MoviesController : ApiController
@@ -22,7 +22,10 @@ namespace Vidley.Controllers.Api
         //GET /api/movies
         public IEnumerable<MovieDto> GetMovies()
         {
-            return _context.Movies.Select(Mapper.Map<Movie, MovieDto>);
+            return _context.Movies
+                      .Include(m => m.Genre)
+                      .ToList()
+                      .Select(Mapper.Map<Movie, MovieDto>);
         }
         //GET /api/movies/1
         public IHttpActionResult GetMovie(int id)
